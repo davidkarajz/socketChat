@@ -15,9 +15,13 @@ message.addEventListener('keypress', function (e) {
     }
 });
 
-message.addEventListener('keypress', function(){
-    socket.emit('typing', user.value);
-});
+function emitChat(){
+    socket.emit('message', {
+        message: message.value,
+        user: user.value
+    });
+    message.value = '';
+}
 
 socket.on('message', function(data){
     feedback.innerHTML = '';
@@ -28,11 +32,3 @@ socket.on('message', function(data){
     }
     console.log(data);
 });
-
-function emitChat(){
-    socket.emit('message', {
-        message: message.value,
-        user: user.value
-    });
-    message.value = '';
-}
