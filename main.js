@@ -1,15 +1,15 @@
-var socket = io.connect('http://185.13.90.140:8081/');
+let socket = io.connect('http://185.13.90.140:8081/');
 
-var output = document.getElementById('output');
-var user = document.getElementById('user');
-var message = document.getElementById('message');
-var btn = document.getElementById('send');
-var feedback = document.getElementById('feedback');
+let output = document.getElementById('output');
+let user = document.getElementById('user');
+let message = document.getElementById('message');
+let btn = document.getElementById('send');
+let feedback = document.getElementById('feedback');
 
 btn.addEventListener('click', emitChat);
 
 message.addEventListener('keypress', function (e) {
-    var key = e.which || e.keyCode;
+    let key = e.which || e.keyCode;
     if (key === 13) {
       emitChat();
     }
@@ -30,5 +30,4 @@ socket.on('message', function(data){
     }else{
         output.innerHTML += '<p>' + data.user + ': ' + data.message + '</p>';
     }
-    console.log(data);
 });
